@@ -257,7 +257,7 @@ def role_to_pod(name: str, role: Role, service_account: Optional[str]) -> "V1Pod
     ]
     security_context = V1SecurityContext()
     capabilities = V1Capabilities()
-    capabilities.add = ["IPC_LOCK]
+    capabilities.add = ["IPC_LOCK"]
     security_context.capabilities = capabilities
 
     for i, mount in enumerate(role.mounts):
