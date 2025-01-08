@@ -363,6 +363,7 @@ def role_to_pod(name: str, role: Role, service_account: Optional[str]) -> "V1Pod
                 # Disable the istio sidecar as it prevents the containers from
                 # exiting once finished.
                 ANNOTATION_ISTIO_SIDECAR: "false",
+                "k8s.v1.cni.cncf.io/networks": "nvidia-network-operator/macvlannetwork-1",
             },
             labels={},
         ),
