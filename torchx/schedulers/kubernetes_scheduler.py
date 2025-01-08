@@ -190,6 +190,7 @@ def sanitize_for_serialization(obj: object) -> object:
 
 def role_to_pod(name: str, role: Role, service_account: Optional[str]) -> "V1Pod":
     from kubernetes.client.models import (  # noqa: F811 redefinition of unused
+        V1Capabilities,
         V1Container,
         V1ContainerPort,
         V1EmptyDirVolumeSource,
@@ -255,6 +256,9 @@ def role_to_pod(name: str, role: Role, service_account: Optional[str]) -> "V1Pod
         V1VolumeMount(name=SHM_VOL, mount_path="/dev/shm"),
     ]
     security_context = V1SecurityContext()
+    capabilities = V1Capabilities()
+    capabilities.add = ["IPC_LOCK]
+    security_context.capabilities = capabilities
 
     for i, mount in enumerate(role.mounts):
         mount_name = f"mount-{i}"
